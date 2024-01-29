@@ -24,7 +24,7 @@ function toggleConnection() {
     try {
       wsStatus.value = "CONNECTING";
       wsConnection.value = new WebSocket(
-        `${import.meta.env.VITE_BACKEND_URL}/echo`,
+        `${import.meta.env.VITE_BACKEND_WS_URL}/echo`,
       );
       wsConnection.value.onopen = () => {
         wsStatus.value = "OPEN";
@@ -38,10 +38,19 @@ function toggleConnection() {
       };
     } catch (e) {
       wsStatus.value = "ERROR";
-      console.log("Could not espablish Websocket connection");
+      console.log("Could not espablish Websocket connection", e);
     }
   } else {
     wsConnection.value.close();
+  }
+}
+
+const wsMessage = ref<string>("");
+function sendMessage() {
+  if (wsStatus.value === "OPEN") {
+    const msg = wsMessage.value;
+    wsConnection.value?.send(msg);
+    wsMessage.value = "";
   }
 }
 </script>
@@ -51,6 +60,10 @@ function toggleConnection() {
   <p>{{ restResponse }}</p>
   <button @click="toggleConnection">Websocket</button>
   <p>Connection {{ wsStatus }}</p>
+  <form @submit.prevent="sendMessage">
+    <input v-model="wsMessage" />
+    <button type="submit">Send</button>
+  </form>
   <div>
     <p v-for="msg of websocketMessages" :key="msg">{{ msg }}</p>
   </div>
