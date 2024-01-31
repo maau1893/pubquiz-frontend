@@ -5,7 +5,8 @@ const restResponse = ref("");
 async function restRequest() {
   restResponse.value = "";
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/health`);
+    // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/health`);
+    const response = await fetch(`http://ec2-35-159-22-172.eu-central-1.compute.amazonaws.com:8080/health`);
     if (response.ok) {
       restResponse.value = await response.json();
     } else {
@@ -24,7 +25,7 @@ function toggleConnection() {
     try {
       wsStatus.value = "CONNECTING";
       wsConnection.value = new WebSocket(
-        `${import.meta.env.VITE_BACKEND_WS_URL}/echo`,
+        `ws://ec2-35-159-22-172.eu-central-1.compute.amazonaws.com:8080/echo`,
       );
       wsConnection.value.onopen = () => {
         wsStatus.value = "OPEN";
