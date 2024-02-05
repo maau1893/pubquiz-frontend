@@ -6,7 +6,7 @@ async function restRequest() {
   restResponse.value = "";
   try {
     // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/health`);
-    const response = await fetch(`http://aa2dc1077fb3342c3940b68924c33bc9-940245889.eu-central-1.elb.amazonaws.com/health`);
+    const response = await fetch(`https://pubquiz.impact6.de/health`);
     if (response.ok) {
       restResponse.value = await response.json();
     } else {
@@ -25,7 +25,7 @@ function toggleConnection() {
     try {
       wsStatus.value = "CONNECTING";
       wsConnection.value = new WebSocket(
-        `ws://aa2dc1077fb3342c3940b68924c33bc9-940245889.eu-central-1.elb.amazonaws.com/echo`,
+        `ws://pubquiz.impact6.de/echo`,
       );
       wsConnection.value.onopen = () => {
         wsStatus.value = "OPEN";
