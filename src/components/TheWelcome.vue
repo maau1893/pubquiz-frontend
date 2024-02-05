@@ -25,7 +25,7 @@ function toggleConnection() {
     try {
       wsStatus.value = "CONNECTING";
       wsConnection.value = new WebSocket(
-        `ws://234qmdz4sf.eu-central-1.awsapprunner.com/echo`,
+        `ws://aa2dc1077fb3342c3940b68924c33bc9-940245889.eu-central-1.elb.amazonaws.com/echo`,
       );
       wsConnection.value.onopen = () => {
         wsStatus.value = "OPEN";
