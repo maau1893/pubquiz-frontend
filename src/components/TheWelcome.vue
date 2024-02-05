@@ -6,7 +6,7 @@ async function restRequest() {
   restResponse.value = "";
   try {
     // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/health`);
-    const response = await fetch(`https://234qmdz4sf.eu-central-1.awsapprunner.com/health`);
+    const response = await fetch(`http://aa2dc1077fb3342c3940b68924c33bc9-940245889.eu-central-1.elb.amazonaws.com/health`);
     if (response.ok) {
       restResponse.value = await response.json();
     } else {
