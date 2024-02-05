@@ -6,7 +6,7 @@ async function restRequest() {
   restResponse.value = "";
   try {
     // const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/health`);
-    const response = await fetch(`https://pubquiz.impact6.de/health`);
+    const response = await fetch(`https://quiz.impact6.de/health`);
     if (response.ok) {
       restResponse.value = await response.json();
     } else {
@@ -25,7 +25,7 @@ function toggleConnection() {
     try {
       wsStatus.value = "CONNECTING";
       wsConnection.value = new WebSocket(
-        `ws://pubquiz.impact6.de/echo`,
+        `wss://quiz.impact6.de/echo`,
       );
       wsConnection.value.onopen = () => {
         wsStatus.value = "OPEN";
